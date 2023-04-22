@@ -6,7 +6,11 @@ import CheckoutItem from '../checkout-item/checkout-item'
 import { CheckoutContainer } from "./checkout-list.styles"
 
 const CheckoutList = () => {
-    const { cartItems, cartPriceTotal } = useContext(CartContext)
+    const { cartItems, cartPriceTotal, clearCart } = useContext(CartContext)
+
+    const onClearCart = () => {
+        clearCart();
+    }
     
     return (
         <>
@@ -35,6 +39,9 @@ const CheckoutList = () => {
                         </tr>
                     </tfoot>
                 </table>
+                <div>
+                    <p onClick={onClearCart}>Clear Cart</p>
+                </div>
             </CheckoutContainer>
         </>
     )
