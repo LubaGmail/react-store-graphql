@@ -1,32 +1,32 @@
-import { useContext, useRef } from "react"
+import { useContext, useRef } from "react";
 
-import { CartContext } from "../../contexts/cart-context"
+import { CartContext } from "../../contexts/cart-context";
 
-import { ImageContainer, ClickableSpan, ClickableTd } from './checkout-item.styles'
+import { ImageContainer, ClickableSpan, ClickableTd } from './checkout-item.styles';
 
 const CheckoutItem = ({item}) => {
-    const { id, name, imageUrl, price, quantity } = item
-    const quantityRef = useRef()
-     const { updateItemQuantity, removeItem } = useContext(CartContext)
+    const { name, imageUrl, price, quantity } = item;
+    const quantityRef = useRef();
+    const { updateItemQuantity, removeItem } = useContext(CartContext);
  
     const subtractQuantity = () => {
         let x = parseInt( (quantityRef.current.innerText).toString() )
         if  (!(x < 2) ) {
-            item.quantity = --x
-            updateItemQuantity (item)
-            quantityRef.current.innerText = x.toString()
+            item.quantity = --x;
+            updateItemQuantity(item);
+            quantityRef.current.innerText = x.toString();
         }
     }
     
     const addQuantity = () => {
-        let x = parseInt( (quantityRef.current.innerText).toString() )
-        item.quantity = ++x
-        updateItemQuantity (item)
-        quantityRef.current.innerText = x.toString()
+        let x = parseInt((quantityRef.current.innerText).toString());
+        item.quantity = ++x;
+        updateItemQuantity(item);
+        quantityRef.current.innerText = x.toString();
     }
 
     const handleRemoveItem = () => {
-        removeItem(item)
+        removeItem(item);
     }
 
     return (
