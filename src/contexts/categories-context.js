@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
 
-import { getCategories } from '../utils/firebase/firebase';
 import { gql, useQuery } from '@apollo/client';
 
 export const CategoriesContext = createContext({
@@ -8,12 +7,13 @@ export const CategoriesContext = createContext({
 });
 
 /*  
-    collections:            Object  key='collections'
-            [0]:    
-                id: "cjwuuj5bz000i0719rrtw5gqk"
-                items:      Array
-                    [{…}, {…},...]
-                        [0] {id: "cjwuuj5ip000j0719taw0mjdz", imageUrl: "https://i...", ...}
+  collections:      Object  key='collections'
+          [0]:    
+            id: "cjwuuj5bz000i0719rrtw5gqk"
+            items:      Array
+                [{…}, {…},...]
+                    [0] 
+                      {id: "cjwuuj5ip000j0719taw0mjdz", imageUrl: "https://i...", ...}
 */
 const COLLECTIONS = gql`
   query {
@@ -57,7 +57,7 @@ export const CategoriesProvider = ({ children }) => {
         }
     }, [data]);
   
-    const value = { categoriesMap };   
+    const value = { categoriesMap, loading, error };   
 
     return (
         <CategoriesContext.Provider value={value}>

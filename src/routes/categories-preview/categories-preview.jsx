@@ -9,29 +9,33 @@ import {
     Title,
     Preview
 } from './category-preview.styles'
+import Spinner from '../../components/spinner/spinner';
 
 const CategoriesPreview = () => {
-    const { categoriesMap } = useContext(CategoriesContext)
+    const { categoriesMap, loading, error } = useContext(CategoriesContext)
     
     return (
         <>
             {
-                Object.keys(categoriesMap).map((title, i) => (
-                    <CategoryPreviewContainer key={i}>
-                        <Link to={`/shop/${title}`}>
-                            <Title>{title.toUpperCase()}</Title>
-                        </Link>
-                        <Preview>
-                            {
-                                categoriesMap[title].map((p, i) => (
-                                    <span key={i}>
-                                        {i < 4 && <Product product={p} />}
-                                    </span>
-                                ))
-                            }
-                        </Preview>
-                    </CategoryPreviewContainer>
-                ) )
+                loading ?
+                    <Spinner />
+                    :
+                    Object.keys(categoriesMap).map((title, i) => (
+                        <CategoryPreviewContainer key={i}>
+                            <Link to={`/shop/${title}`}>
+                                <Title>{title.toUpperCase()}</Title>
+                            </Link>
+                            <Preview>
+                                {
+                                    categoriesMap[title].map((p, i) => (
+                                        <span key={i}>
+                                            {i < 4 && <Product product={p} />}
+                                        </span>
+                                    ))
+                                }
+                            </Preview>
+                        </CategoryPreviewContainer>
+                    ) )
             }   
         </>
     )
