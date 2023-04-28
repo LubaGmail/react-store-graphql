@@ -1,10 +1,10 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, memo } from "react";
 
 import { CartContext } from "../../contexts/cart-context";
 
 import { ImageContainer, ClickableSpan, ClickableTd } from './checkout-item.styles';
 
-const CheckoutItem = ({item}) => {
+const CheckoutItem = memo( ( {item}) => {
     const { name, imageUrl, price, quantity } = item;
     const quantityRef = useRef();
     const { updateItemQuantity, removeItem } = useContext(CartContext);
@@ -46,6 +46,6 @@ const CheckoutItem = ({item}) => {
             </ClickableTd>  
         </>
     )
-}
+})
 
 export default CheckoutItem
